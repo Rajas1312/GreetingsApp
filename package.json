@@ -4,6 +4,7 @@
   "description": "greetings app",
   "main": "server.js",
   "scripts": {
+    "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rajaas",
@@ -13,5 +14,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.11.16",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0"
   }
 }

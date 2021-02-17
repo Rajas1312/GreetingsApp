@@ -1,31 +1,36 @@
-const Greeting = require('../models/greeting.model.js');
+//const Greeting = require('../models/greetings.js');
+const service = require('../services/greetings.js');
 
 // Create and Save a new Note
+
 exports.create = (req, res) => {
-    // Validate request
-    if (!req.body.greeting) {
-        return res.status(400).send({
-            message: "Note content can not be empty"
-        });
-    }
+    service.createServices(req.body).then()
+}
+// exports.create = (req, res) => {
+//     // Validate request
+//     if (!req.body.greeting) {
+//         return res.status(400).send({
+//             message: "Note content can not be empty"
+//         });
+//     }
 
-    // Create a Note
-    const greeting = new Greeting({
-        name: req.body.name || "Untitled Note",
-        greeting: req.body.greeting
-    });
+//     // Create a Note
+//     const greeting = new Greeting({
+//         name: req.body.name || "Untitled Note",
+//         greeting: req.body.greeting
+//     });
 
-    // Save Note in the database
-    greeting.save()
-        .then(data => {
-            res.send(data);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the Note."
-            });
-        });
+//     // Save Note in the database
+//     greeting.save()
+//         .then(data => {
+//             res.send(data);
+//         }).catch(err => {
+//             res.status(500).send({
+//                 message: err.message || "Some error occurred while creating the Note."
+//             });
+//         });
 
-};
+// };
 
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {

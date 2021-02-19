@@ -1,11 +1,13 @@
 const model = require('../models/greetings.js');
 class GreetingService {
-    createServices = (req) => {
-        console.log("Request data in service", req)
-        return model.create(req).then(data => {
-            return data;
-        }).catch(err => {
-            return err
+    create = (req, callback) => {
+        model.create(req, (err, result) => {
+            console.log("in services", req);
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, result);
+            }
         })
     }
 }

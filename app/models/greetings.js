@@ -26,5 +26,15 @@ class GreetingModel {
         })
         console.log("in models", req)
     };
+
+    findAll = (callback) => {
+        Greeting.find((err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result);
+            }
+        });
+    }
 }
 module.exports = new GreetingModel();

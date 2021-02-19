@@ -19,17 +19,16 @@ exports.create = (req, res) => {
     });
 };
 
-// // Retrieve and return all notes from the database.
-// exports.findAll = (req, res) => {
-//     Greeting.find()
-//         .then(greeting => {
-//             res.send(greeting);
-//         }).catch(err => {
-//             res.status(500).send({
-//                 message: err.message || "Some error occurred while retrieving notes."
-//             });
-//         });
-// };
+// Retrieve and return all notes from the database.
+exports.findAll = (req, res) => {
+    service.findAll((err, result) => {
+        if (err) {
+            res.status(404).send(err)
+        } else {
+            res.status(200).send(result)
+        }
+    })
+};
 
 // // Find a single note with a noteId
 // exports.findOne = (req, res) => {

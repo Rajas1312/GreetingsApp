@@ -36,5 +36,15 @@ class GreetingModel {
             }
         });
     }
+
+    findOne = (greetingID, callback) => {
+        Greeting.findById(greetingID, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result);
+            }
+        });
+    }
 }
 module.exports = new GreetingModel();

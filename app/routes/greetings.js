@@ -7,8 +7,8 @@ module.exports = (app) => {
     // Retrieve all Notes
     app.get('/greeting', greeting.findAll);
 
-    // // Retrieve a single Note with noteId
-    // app.get('/greeting/:greetingId', greeting.findOne);
+    // Retrieve a single Note with noteId
+    app.get('/greeting/:greetingId', greeting.findOne);
 
     // // Update a Note with noteId
     // app.put('/greeting/:greetingId', greeting.update);

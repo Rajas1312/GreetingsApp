@@ -17,8 +17,16 @@ class GreetingService {
             } else {
                 callback(null, result);
             }
+        });
+    }
 
-
+    findOne = (greetingID, callback) => {
+        model.findOne(greetingID, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result);
+            }
         });
     }
 }

@@ -30,27 +30,17 @@ exports.findAll = (req, res) => {
     })
 };
 
-// // Find a single note with a noteId
-// exports.findOne = (req, res) => {
-//     Greeting.findById(req.params.greetingId)
-//         .then(greeting => {
-//             if (!greeting) {
-//                 return res.status(404).send({
-//                     message: "Note not found with id " + req.params.greetingId
-//                 });
-//             }
-//             res.send(greeting);
-//         }).catch(err => {
-//             if (err.kind === 'ObjectId') {
-//                 return res.status(404).send({
-//                     message: "Note not found with id " + req.params.greetingId
-//                 });
-//             }
-//             return res.status(500).send({
-//                 message: "Error retrieving note with id " + req.params.greetingId
-//             });
-//         });
-// };
+// Find a single note with a noteId
+exports.findOne = (req, res) => {
+    const greetingId = req.params.greetingId
+    service.findOne(greetingId, (err, result) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(result)
+        }
+    })
+};
 
 // // Update a note identified by the noteId in the request
 // exports.update = (req, res) => {

@@ -10,10 +10,10 @@ const GreetingsSchema = mongoose.Schema({
 const Greeting = mongoose.model('Greetings', GreetingsSchema);
 
 class GreetingModel {
-    create = (req, callback) => {
+    create = (greetings, callback) => {
         const greeting = new Greeting({
-            name: req.name || "Untitled Note",
-            greeting: req.greeting
+            name: greetings.name || "Untitled Note",
+            greeting: greetings.greeting
         });
 
         // Save Note in the database
@@ -24,7 +24,6 @@ class GreetingModel {
                 callback(null, result)
             }
         })
-        console.log("in models", req)
     };
 
     findAll = (callback) => {
@@ -52,6 +51,16 @@ class GreetingModel {
             name: greeting.name,
             message: greeting.message || "Empty Message"
         }, { new: true }, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
+    deleteById = (greetingId, callback) => {
+        Greeting.findByIdAndRemove(greetingId, (err, result) => {
             if (err) {
                 callback(err, null)
             } else {

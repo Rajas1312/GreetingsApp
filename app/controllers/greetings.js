@@ -11,21 +11,33 @@ exports.create = (req, res) => {
     service.create(greeting, (err, result) => {
         if (err) {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Note."
+                sucess: false,
+                message: "Some error occurred while creating the Note."
             })
         } else {
-            res.status(200).send(result);
+            res.status(200).send({
+                sucess: true,
+                message: "created greetings sucessfully",
+                result: result
+            });
         }
     });
 };
 
 // Retrieve and return all notes from the database.
-exports.findAll = (req, res) => {
+exports.findAll = (res) => {
     service.findAll((err, result) => {
         if (err) {
-            res.status(404).send(err)
+            res.status(404).send({
+                sucess: false,
+                message: "could not find any entries"
+            })
         } else {
-            res.status(200).send(result)
+            res.status(200).send({
+                sucess: true,
+                message: "found greetings sucessfully",
+                result: result
+            })
         }
     })
 };
@@ -35,9 +47,16 @@ exports.findOne = (req, res) => {
     const greetingId = req.params.greetingId
     service.findOne(greetingId, (err, result) => {
         if (err) {
-            res.status(500).send(err)
+            res.status(500).send({
+                sucess: false,
+                message: "could not find the entry"
+            })
         } else {
-            res.status(200).send(result)
+            res.status(200).send({
+                sucess: true,
+                message: "found greetings sucessfully",
+                result: result
+            })
         }
     })
 };
@@ -50,31 +69,34 @@ exports.update = (req, res) => {
     }
     service.update(greeting, (err, result) => {
         if (err) {
-            res.status(500).send(err)
+            res.status(500).send({
+                sucess: false,
+                message: "could not find the entry"
+            })
         } else {
-            res.status(200).send(result)
+            res.status(200).send({
+                sucess: true,
+                message: "found greetings sucessfully",
+                result: result
+            })
         }
     })
 }
 
-// // Delete a note with the specified noteId in the request
-// exports.delete = (req, res) => {
-//     Greeting.findByIdAndRemove(req.params.greetingId)
-//         .then(greeting => {
-//             if (!greeting) {
-//                 return res.status(404).send({
-//                     message: "Note not found with id " + req.params.greetingId
-//                 });
-//             }
-//             res.send({ message: "Note deleted successfully!" });
-//         }).catch(err => {
-//             if (err.kind === 'ObjectId' || err.name === 'NotFound') {
-//                 return res.status(404).send({
-//                     message: "Note not found with id " + req.params.greetingId
-//                 });
-//             }
-//             return res.status(500).send({
-//                 message: "Could not delete note with id " + req.params.greetingId
-//             });
-//         });
-//};
+exports.delete = (req, res) => {
+    const greetingId = req.params.greetingId;
+    service.delete(greetingId, (err, result) => {
+        if (err) {
+            res.status(500).send({
+                success: false,
+                message: "greeting not found with id " + greetingID
+            })
+        } else {
+            res.status(200).send({
+                success: true,
+                message: "greeting deleted successfully!",
+                result: result
+            })
+        }
+    })
+}

@@ -1,6 +1,5 @@
+const greeting = require('../controllers/greetings.js');
 module.exports = (app) => {
-    const greeting = require('../controllers/greetings.js');
-
     // Create a new Note
     app.post('/greeting', greeting.create);
 
@@ -13,6 +12,6 @@ module.exports = (app) => {
     // Update a Note with noteId
     app.put('/greeting/:greetingId', greeting.update);
 
-    // // Delete a Note with noteId
-    // app.delete('/greeting/:greetingId', greeting.delete);
+    // Delete a Note with noteId
+    app.delete('/greeting/:greetingId', greeting.delete);
 }

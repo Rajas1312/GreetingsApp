@@ -42,38 +42,20 @@ exports.findOne = (req, res) => {
     })
 };
 
-// // Update a note identified by the noteId in the request
-// exports.update = (req, res) => {
-//     // Validate Request
-//     if (!req.body.greeting) {
-//         return res.status(400).send({
-//             message: "Note content can not be empty"
-//         });
-//     }
-
-//     // Find note and update it with the request body
-//     Greeting.findByIdAndUpdate(req.params.greetingId, {
-//         name: req.body.name || "Untitled Note",
-//         greeting: req.body.greeting
-//     }, { new: true })
-//         .then(greeting => {
-//             if (!greeting) {
-//                 return res.status(404).send({
-//                     message: "Note not found with id " + req.params.greetingId
-//                 });
-//             }
-//             res.send(greeting);
-//         }).catch(err => {
-//             if (err.kind === 'ObjectId') {
-//                 return res.status(404).send({
-//                     message: "Note not found with id " + req.params.greetingId
-//                 });
-//             }
-//             return res.status(500).send({
-//                 message: "Error updating note with id " + req.params.greetingId
-//             });
-//         });
-// };
+exports.update = (req, res) => {
+    const greeting = {
+        name: req.body.name,
+        message: req.body.message,
+        greetingID: req.params.greetingId
+    }
+    service.update(greeting, (err, result) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(result)
+        }
+    })
+}
 
 // // Delete a note with the specified noteId in the request
 // exports.delete = (req, res) => {

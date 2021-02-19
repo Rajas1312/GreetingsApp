@@ -46,5 +46,18 @@ class GreetingModel {
             }
         });
     }
+
+    update = (greeting, callback) => {
+        Greeting.findByIdAndUpdate(greeting.greetingID, {
+            name: greeting.name,
+            message: greeting.message || "Empty Message"
+        }, { new: true }, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result);
+            }
+        });
+    }
 }
 module.exports = new GreetingModel();

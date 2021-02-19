@@ -10,8 +10,8 @@ module.exports = (app) => {
     // Retrieve a single Note with noteId
     app.get('/greeting/:greetingId', greeting.findOne);
 
-    // // Update a Note with noteId
-    // app.put('/greeting/:greetingId', greeting.update);
+    // Update a Note with noteId
+    app.put('/greeting/:greetingId', greeting.update);
 
     // // Delete a Note with noteId
     // app.delete('/greeting/:greetingId', greeting.delete);

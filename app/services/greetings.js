@@ -29,5 +29,16 @@ class GreetingService {
             }
         });
     }
+
+    update = (greeting, callback) => {
+        model.update(greeting, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
 }
 module.exports = new GreetingService();

@@ -10,13 +10,19 @@ const GreetingsSchema = mongoose.Schema({
 const Greeting = mongoose.model('Greetings', GreetingsSchema);
 
 class GreetingModel {
+
+    /**
+     * @description saving  greetings in the database
+     * @param {*} greetings 
+     * @param {*}callback 
+     */
+
     create = (greetings, callback) => {
         const greeting = new Greeting({
             name: greetings.name || "Untitled Note",
             greeting: greetings.greeting
         });
 
-        // Save Note in the database
         greeting.save((err, result) => {
             if (err) {
                 callback(err, null)
@@ -25,6 +31,11 @@ class GreetingModel {
             }
         })
     };
+
+    /**
+     * @description serching all greetings from database
+     * @param {*}callback 
+     */
 
     findAll = (callback) => {
         Greeting.find((err, result) => {
@@ -36,6 +47,12 @@ class GreetingModel {
         });
     }
 
+    /**
+     * @description serach on greeting from database
+     * @param {*}callback 
+     * @param {*}greetingID
+     */
+
     findOne = (greetingID, callback) => {
         Greeting.findById(greetingID, (err, result) => {
             if (err) {
@@ -45,6 +62,12 @@ class GreetingModel {
             }
         });
     }
+
+    /**
+     * @description Update greetings using object id
+     * @param {*} greeting 
+     * @param {*}callback 
+     */
 
     update = (greeting, callback) => {
         Greeting.findByIdAndUpdate(greeting.greetingID, {
@@ -58,6 +81,12 @@ class GreetingModel {
             }
         });
     }
+
+    /**
+     * @description delete greetings using object id
+     * @param {*} greetingId 
+     * @param {*}callback 
+     */
 
     deleteById = (greetingId, callback) => {
         Greeting.findByIdAndRemove(greetingId, (err, result) => {

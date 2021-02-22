@@ -1,5 +1,10 @@
 const service = require('../services/greetings.js');
-const { body, validationResult } = require('express-validator');
+const Joi = require('joi');
+
+const ControllerDataValidation = Joi.object().keys({
+    name: Joi.string().required(),
+    greeting: Joi.string().required()
+})
 
 class GreetingController {
     create = ((req, res,) => {
@@ -8,10 +13,12 @@ class GreetingController {
             name: req.body.name || "Untitled Note",
             greeting: req.body.greeting
         };
-        const x = body('name').exists().isLength({ min: 2 }),
-        const error = validationResult(req.body.name)
-        if (!error.isEmpty()) {
-            return res.status(422).jsonp(error.array())
+        const validation = ControllerDataValidation.validate(greeting);
+        if (validation.error) {
+            res.status(400).send({
+                success: false,
+                message: " enter in valid format"
+            })
         } else {
             service.create(greeting, (err, result) => {
                 if (err) {
@@ -28,6 +35,7 @@ class GreetingController {
                 }
             });
         }
+
     });
 
     // Retrieve and return all notes from the database.

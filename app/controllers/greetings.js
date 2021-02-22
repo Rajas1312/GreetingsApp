@@ -8,7 +8,11 @@ const ControllerDataValidation = Joi.object().keys({
 
 class GreetingController {
     create = ((req, res,) => {
-        // Create a Note
+        /**
+         * @description Create and save a new greeting
+         * @param req is used to get the request
+         * @param res is used to send resposne
+         */
         const greeting = {
             name: req.body.name || "Untitled Note",
             greeting: req.body.greeting
@@ -38,7 +42,12 @@ class GreetingController {
 
     });
 
-    // Retrieve and return all notes from the database.
+    /**
+        * @description Find all the greeting
+        * @method findAll is service class method
+        * @param req is used to get the request
+        *  @param res is used to send resposne
+        */
     findAll = (req, res) => {
         service.findAll((err, result) => {
             if (err) {
@@ -56,7 +65,12 @@ class GreetingController {
         })
     };
 
-    // Find a single note with a noteId
+    /**
+        * @description Find greeting by id
+        * @method findOne is service class method
+        * @param req is used to get the request
+        * @param res is used to send the response
+        */
     findOne = (req, res) => {
         const greetingId = req.params.greetingId
         service.findOne(greetingId, (err, result) => {
@@ -74,6 +88,13 @@ class GreetingController {
             }
         })
     };
+
+    /**
+    * @description Update greeting by id
+    * @method update is service class method
+    * @param res is used to send the response
+    * @param req is used to get the request
+    */
 
     update = (req, res) => {
         const greeting = {
@@ -96,6 +117,13 @@ class GreetingController {
             }
         })
     }
+
+    /**
+     * @description delete greeting with id
+     * @method delete is service class method
+     * @param res is used to send the response
+     * @param req is used to get the request 
+     */
 
     delete = (req, res) => {
         const greetingId = req.params.greetingId;

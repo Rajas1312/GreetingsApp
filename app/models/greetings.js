@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const GreetingsSchema = mongoose.Schema({
-    name: String,
-    greeting: String
+    name: { type: String, required: true },
+    greeting: { type: String, required: true }
 }, {
     timestamps: true
 });
@@ -19,7 +19,7 @@ class GreetingModel {
 
     create = (greetings, callback) => {
         const greeting = new Greeting({
-            name: greetings.name || "Untitled Note",
+            name: greetings.name,
             greeting: greetings.greeting
         });
 

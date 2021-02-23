@@ -23,13 +23,7 @@ class GreetingModel {
             greeting: greetings.greeting
         });
 
-        greeting.save((err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result)
-            }
-        })
+        greeting.save(callback)
     };
 
     /**

@@ -8,7 +8,7 @@ let server = require('../server.js');
 
 let should = chai.should();
 chai.use(chaiHttp);
-//const greet = require("./greetings.json");
+const greet = require("./greetings.json");
 
 describe("Greetings API", () => {
 
@@ -48,5 +48,34 @@ describe('/POST book', () => {
                 done();
             });
     });
+
+});
+
+describe("/GET /greetings/greetingId", () => {
+
+    // test the GET API when provided proper greeting Id
+    it("givenGreetings_WhenGivenProperGreetoingId_ShouldGive_object", (done) => {
+        const greetingId = greet.greetings.getGreetingById.greetingId
+        chai
+            .request(server)
+            .get("/greeting/:greetingId" + greetingId)
+            .end((err, response) => {
+                response.should.have.status(200);
+                response.body.should.be.a("object");
+                done();
+            });
+    })
+
+    it("givenGreetings_WhenNotGivenProperGreetoingId_ShouldNotGive_object", (done) => {
+        const greetingID = 144;
+        chai
+            .request(server)
+            .get("/greeting/:greetingId" + greetingID)
+            .end((err, res) => {
+                res.should.have.status(500);
+                done();
+            });
+
+    })
 
 });

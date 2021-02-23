@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const logger = require('./logger/logger.js');
+const logger = require('./logger/logger');
 
 // create express app
 const app = express();

@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const logger = require('./logger/logger.js');
 
 // create express app
 const app = express();
@@ -38,4 +39,7 @@ require('./app/routes/greetings.js')(app);
 // listen for requests
 app.listen(8000, () => {
     console.log("Server is listening on port 8000");
+    logger.info(`the server is listening on port 8000`)
 });
+
+module.exports = app;

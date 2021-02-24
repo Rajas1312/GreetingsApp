@@ -3,7 +3,34 @@
         "getGreetingById": {
             "greetingId": 1,
             "name": "Rajas",
-            "message": "Hello"
+            "greeting": "Hello"
+        },
+        "greetingToPost": {
+            "greetingId": 2,
+            "name": "Adarsh",
+            "greeting": "Hello"
+        },
+        "improperGreetingToPost": {
+            "greetingId": 2,
+            "greeting": "Hello"
+        },
+        "greetingWithImproperName": {
+            "greetingId": 7,
+            "name": "co",
+            "greeting": "EHello"
+        },
+        "greetingWithoutName": {
+            "greetingId": 6,
+            "greeting": "DHello"
+        },
+        "greetingWithoutMessage": {
+            "greetingId": 8,
+            "name": "Shivam"
+        },
+        "greetingToUpdate": {
+            "greetingId": 2,
+            "name": "payalllchanged",
+            "greeting": "Worlddd"
         }
     }
 }

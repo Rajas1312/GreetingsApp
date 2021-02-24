@@ -32,13 +32,7 @@ class GreetingModel {
      */
 
     findAll = (callback) => {
-        Greeting.find((err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        Greeting.find(callback);
     }
 
     /**
@@ -48,13 +42,7 @@ class GreetingModel {
      */
 
     findOne = (greetingID, callback) => {
-        Greeting.findById(greetingID, (err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        Greeting.findById(greetingID, callback)
     }
 
     /**
@@ -66,14 +54,8 @@ class GreetingModel {
     update = (greeting, callback) => {
         Greeting.findByIdAndUpdate(greeting.greetingID, {
             name: greeting.name,
-            message: greeting.message || "Empty Message"
-        }, { new: true }, (err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+            greeting: greeting.greeting
+        }, { new: true }, callback)
     }
 
     /**
@@ -83,13 +65,7 @@ class GreetingModel {
      */
 
     deleteById = (greetingId, callback) => {
-        Greeting.findByIdAndRemove(greetingId, (err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        Greeting.findByIdAndRemove(greetingId, callback);
     }
 }
 module.exports = new GreetingModel();

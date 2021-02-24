@@ -17,8 +17,7 @@ describe("Greetings API", () => {
      */
     describe("GET /greetings", () => {
 
-        // test the GET API when points are proper
-        it("should get all the greetings", (done) => {
+        it("givenGreeting_whenProper_should get all the greetings", (done) => {
             console.log("getting all data .");
             chai
                 .request(server)
@@ -34,7 +33,7 @@ describe("Greetings API", () => {
 });
 
 describe('/POST book', () => {
-    it('it should not POST a book without pages field', (done) => {
+    it('GivenGreeting_WhenProper_should POST a object', (done) => {
         let greeting = {
             name: "Rajas",
             greeting: "hello"
@@ -53,8 +52,7 @@ describe('/POST book', () => {
 
 describe("/GET /greetings/greetingId", () => {
 
-    // test the GET API when provided proper greeting Id
-    it("givenGreetings_WhenGivenProperGreetoingId_ShouldGive_object", (done) => {
+    it("givenGreetings_WhenGivenProperGreetingId_ShouldGive_object", (done) => {
         const greetingId = greet.greetings.getGreetingById.greetingId
         chai
             .request(server)

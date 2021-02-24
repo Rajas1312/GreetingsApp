@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('./logger/logger');
+const swaggerUi = require('swagger-ui-express')
+const swaggerJson = require('./swagger/swagger.json')
 
 // create express app
 const app = express();
@@ -33,6 +35,7 @@ app.get('/', (req, res) => {
     res.json({ "message": "welcome to greetings app" });
 })
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJson))
 // Require Notes routes
 require('./app/routes/greetings.js')(app);
 

@@ -4,31 +4,6 @@
             "greetingId": 1,
             "name": "Rajas",
             "message": "Hello"
-        },
-        "greetingToUpdate": {
-            "greetingId": 2,
-            "name": "Shivam",
-            "message": "Hello"
-        },
-        "greetingToDelete": {
-            "greetingId": 3,
-            "name": "Adarsh",
-            "message": "Hello"
-        },
-        "greetingToPost": {
-            "greetingId": 4,
-            "name": "Parag",
-            "message": "Hello"
-        },
-        "greeting5": {
-            "greetingId": 5,
-            "name": "Amish",
-            "message": "Hello"
-        },
-        "greeting7": {
-            "greetingId": 6,
-            "name": "Ashish",
-            "message": "Hello"
         }
     }
 }

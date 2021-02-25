@@ -14,6 +14,11 @@
             "greetingId": 4,
             "name": "RajasUpdate",
             "greeting": "hello"
+        },
+        "greetingToDelete": {
+            "greetingId": "1",
+            "name": "RajasUpdate",
+            "greeting": "hello"
         }
     }
 }

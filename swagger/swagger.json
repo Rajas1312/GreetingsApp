@@ -23,23 +23,6 @@
     "produces": [
         "application/json"
     ],
-    "components": [
-        {
-            "schemas": {
-                "Greetings": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "greeting": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        }
-    ],
     "paths": {
         "/greeting": {
             "get": {
@@ -77,7 +60,18 @@
                         "name": " greeting ",
                         "in": "body",
                         "type": "string",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "greeting": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -112,7 +106,18 @@
                         "name": " greeting ",
                         "in": "body",
                         "type": "string",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "greeting": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 ],
                 "responses": {

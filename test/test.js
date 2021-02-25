@@ -123,4 +123,15 @@ describe("Testing Greetings API", () => {
         })
     })
 
+    it("givenGreetings_WhenGivenProperId_ShouldNotDeleteGreeting", (done) => {
+        const greetingID = greet.greetings.greetingToDelete.greetingId;
+        chai
+            .request(server)
+            .delete("/greetings/:greetingId" + greetingID)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.be.a("Object");
+                done()
+            })
+    })
 })

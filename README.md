@@ -1,9 +1,14 @@
 # Greetings Api
 
 ## description
-This is a greetings api which is an example of backend development using node.js express and mongo db.
+This is a greeings app project made with nodejs,express and mongodb.
 
-## steps to clone
-1. click on the code button
-2. copy the URL
-3. use the clone command and paste it on the terminal.
+## development server
+in this project directory you can run
+
+## npm start
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in the browser.
+
+The page will reload if you make edits.
+You will also see any lint errors in the console.

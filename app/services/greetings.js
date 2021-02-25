@@ -15,7 +15,6 @@ class GreetingService {
      * @method create is used to save the greeting
      * @param callback is the callback for controller
      */
-
     create = (greetings, callback) => {
         model.create(greetings, callback)
     }
@@ -25,7 +24,6 @@ class GreetingService {
      * @method findAll is used to retrieve greetings
      * @param callback is the callback for controller
      */
-
     findAll = (callback) => {
         model.findAll(callback);
     }

@@ -20,6 +20,7 @@ class GreetingController {
          * @param req is used to get the request
          * @param res is used to send resposne
          */
+
     create = ((req, res,) => {
 
         const greeting = {
@@ -60,6 +61,7 @@ class GreetingController {
         * @param req is used to get the request
         *  @param res is used to send resposne
         */
+
     findAll = (req, res) => {
         service.findAll((err, result) => {
             try {
@@ -96,6 +98,7 @@ class GreetingController {
         * @param req is used to get the request
         * @param res is used to send the response
         */
+
     findOne = (req, res) => {
         const greetingId = req.params.greetingId
         service.findOne(greetingId, (err, result) => {
@@ -165,8 +168,6 @@ class GreetingController {
             })
         };
     }
-
-
     /**
      * @description delete greeting with id
      * @method delete is service class method

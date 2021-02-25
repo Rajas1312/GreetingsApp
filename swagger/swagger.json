@@ -23,6 +23,23 @@
     "produces": [
         "application/json"
     ],
+    "components": [
+        {
+            "schemas": {
+                "Greetings": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "greeting": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
     "paths": {
         "/greeting": {
             "get": {

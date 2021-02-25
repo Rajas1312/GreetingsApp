@@ -10,19 +10,6 @@
             "name": "Adarsh",
             "greeting": "Hello"
         },
-        "greetingWithImproperName": {
-            "greetingId": 7,
-            "name": "co",
-            "greeting": "Hello"
-        },
-        "greetingWithoutName": {
-            "greetingId": 6,
-            "greeting": "Hello"
-        },
-        "greetingWithoutMessage": {
-            "greetingId": 8,
-            "name": "Shivam"
-        },
         "greetingToUpdate": {
             "greetingId": 4,
             "name": "RajasUpdate",

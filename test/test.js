@@ -1,7 +1,4 @@
-let mongoose = require("mongoose");
-let Greetings = require('../app/models/greetings.js');
 
-//Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../server.js');
@@ -10,11 +7,12 @@ let should = chai.should();
 chai.use(chaiHttp);
 const greet = require("./greetings.json");
 
+/**
+ * @description Test the GET API
+ */
+
 describe("Testing Greetings API", () => {
 
-    /**
-     * @description Test the GET API
-     */
     describe("GET /greetings", () => {
 
         it("givenGreeting_whenProper_should get all the greetings", (done) => {
@@ -42,7 +40,7 @@ describe("Testing Greetings API", () => {
                     done();
                 });
         });
-        it('GivenGreeting_WhenImproperProper_should POST a object', (done) => {
+        it('GivenGreeting_WhenImproperProper_shouldGiveStatusError', (done) => {
             const greeting = greet.greetings.improperGreetingToPost
             chai.request(server)
                 .post('/greeting')
@@ -79,40 +77,50 @@ describe("Testing Greetings API", () => {
                     res.should.have.status(500);
                     done();
                 });
-
         })
 
     });
 
     describe("/PUT  /greetings/:greetingId", () => {
-        // test the PUT API when provided proper Id
-        it("givenGreetings_WhenGivenProperId_ShouldUpdate_Greeting", (done) => {
-            const greetingID = greet.greetings.greetingToUpdate.greetingId;
-            const greeting = greet.greetings.greetingWithImproperName.greetingId4;
-            chai
-                .request(server)
-                .put("/greetings/" + greetingID)
-                .send(greeting)
-                .end((err, res) => {
-                    res.should.have.status(404);
-                    res.body.should.be.a("Object");
-                    done();
-                });
-        });
 
-        // test the PUT API when provided improper Id
-        it("givenGreetings_WhenNotGivenProperName_ShouldNotUpdate_Greeting", (done) => {
+        it("givenGreetings_WhenGivenProperId_ShouldUpdateGreeting", (done) => {
             const greetingID = greet.greetings.greetingToUpdate.greetingId;
-            const greeting = greet.greetings.greetingWithoutMessage.greetingId8;
             chai
                 .request(server)
-                .put("/greetings/" + greetingID)
-                .send(greeting)
+                .put("/greeting/:greetingId" + greetingID)
                 .end((err, res) => {
-                    res.should.have.status(404);
-                    done();
-                });
-        });
-    });
+                    res.should.have.status(200);
+                    res.body.should.be.a("Object");
+                    done()
+                })
+        })
+
+        it("givenGreetings_WhenGivenImproperId_ShouldNotUpdate_Greeting", (done) => {
+            const greetingID = null
+            chai
+                .request(server)
+                .put("/greeting/:greetingId" + greetingID)
+                .end((err, res) => {
+                    res.should.have.status(500);
+                    res.body.should.be.a("Object");
+                    done()
+                })
+        })
+    })
+
+    describe("/Delete  /greetings/:greetingId", () => {
+
+        it("givenGreetings_WhenGivenProperId_ShouldDeleteGreeting", (done) => {
+            const greetingID = greet.greetings.greetingToUpdate.greetingId;
+            chai
+                .request(server)
+                .delete("/greeting/:greetingId" + greetingID)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a("Object");
+                    done()
+                })
+        })
+    })
 
 })

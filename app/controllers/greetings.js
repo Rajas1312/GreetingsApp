@@ -21,39 +21,48 @@ class GreetingController {
          * @param res is used to send resposne
          */
 
-    create = ((req, res,) => {
-
-        const greeting = {
-            name: req.body.name,
-            greeting: req.body.greeting
-        };
-        const validation = ControllerDataValidation.validate(greeting);
-        if (validation.error) {
-            res.status(400).send({
+    create = (req, res,) => {
+        try {
+            const greeting = {
+                name: req.body.name,
+                greeting: req.body.greeting
+            };
+            const validation = ControllerDataValidation.validate(greeting);
+            if (validation.error) {
+                res.status(400).send({
+                    success: false,
+                    message: " should be a string"
+                })
+            } else {
+                service.create(greeting, (err, result) => {
+                    if (err) {
+                        (logger.error("Some error occurred while creating greeting"),
+                            res.status(500).send({
+                                sucess: false,
+                                message: "Some error occurred while creating the Note."
+                            })
+                        )
+                    } else {
+                        logger.info("Greeting added successfully !"),
+                            res.status(200).send({
+                                sucess: true,
+                                message: "created greetings sucessfully",
+                                result: result
+                            });
+                    }
+                });
+            }
+        } catch (error) {
+            logger.error("could not create greeting ");
+            return res.send({
                 success: false,
-                message: " should be a string"
+                status_code: 500,
+                message: "error creating greeting "
             })
-        } else {
-            service.create(greeting, (err, result) => {
-                if (err) {
-                    (logger.error("Some error occurred while creating greeting"),
-                        res.status(500).send({
-                            sucess: false,
-                            message: "Some error occurred while creating the Note."
-                        })
-                    )
-                } else {
-                    logger.info("Greeting added successfully !"),
-                        res.status(200).send({
-                            sucess: true,
-                            message: "created greetings sucessfully",
-                            result: result
-                        });
-                }
-            });
         }
 
-    });
+
+    };
 
     /**
         * @description Find all the greeting
@@ -63,8 +72,8 @@ class GreetingController {
         */
 
     findAll = (req, res) => {
-        service.findAll((err, result) => {
-            try {
+        try {
+            service.findAll((err, result) => {
                 if (err) {
                     (logger.error("Some error occurred while serching greeting"),
                         res.status(404).send({
@@ -80,16 +89,15 @@ class GreetingController {
                             result: result
                         })
                 }
-            } catch (error) {
-                logger.error("greeting not found");
-                res.send({
-                    success: false,
-                    status_code: 500,
-                    message: `greeting not found`,
-                });
-            }
-
-        })
+            })
+        } catch (error) {
+            logger.error("greeting not found");
+            res.send({
+                success: false,
+                status_code: 500,
+                message: `greeting not found`,
+            });
+        }
     };
 
     /**
@@ -100,9 +108,9 @@ class GreetingController {
         */
 
     findOne = (req, res) => {
-        const greetingId = req.params.greetingId
-        service.findOne(greetingId, (err, result) => {
-            try {
+        try {
+            const greetingId = req.params.greetingId
+            service.findOne(greetingId, (err, result) => {
                 if (err) {
                     (logger.error("Some error occurred while serching greetingId" + req.params.greetingId),
                         res.status(500).send({
@@ -118,16 +126,16 @@ class GreetingController {
                             result: result
                         })
                 }
-            } catch (error) {
-                logger.error("could not found greeting with id" + req.params.greetingId);
-                return res.send({
-                    success: false,
-                    status_code: 500,
-                    message: "error retrieving greeting with id " + req.params.greetingId
-                })
-            }
-        })
-    };
+            })
+        } catch (error) {
+            logger.error("could not found greeting with id" + req.params.greetingId);
+            return res.send({
+                success: false,
+                status_code: 500,
+                message: "error retrieving greeting with id " + req.params.greetingId
+            })
+        }
+    }
 
     /**
     * @description Update greeting by id
@@ -168,6 +176,7 @@ class GreetingController {
             })
         };
     }
+
     /**
      * @description delete greeting with id
      * @method delete is service class method

@@ -1,3 +1,12 @@
+
+/**
+ * @module       Services
+ * @file         greeting.js
+ * @description  holds the methods calling from controller
+ * @author       Rajas Dongre <itsmerajas2@gmail.com>
+*  @since        15/02/2021  
+-----------------------------------------------------------------------------------------------*/
+
 const model = require('../models/greetings.js');
 class GreetingService {
 
@@ -8,14 +17,7 @@ class GreetingService {
      */
 
     create = (greetings, callback) => {
-        model.create(greetings, (err, result) => {
-
-            if (err) {
-                callback(err, null);
-            } else {
-                callback(null, result);
-            }
-        })
+        model.create(greetings, callback)
     }
 
     /**
@@ -25,13 +27,7 @@ class GreetingService {
      */
 
     findAll = (callback) => {
-        model.findAll((err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        model.findAll(callback);
     }
 
     /**
@@ -41,13 +37,7 @@ class GreetingService {
      */
 
     findOne = (greetingID, callback) => {
-        model.findOne(greetingID, (err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        model.findOne(greetingID, callback);
     }
 
     /**
@@ -57,13 +47,7 @@ class GreetingService {
     */
 
     update = (greeting, callback) => {
-        model.update(greeting, (err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        model.update(greeting, callback);
     }
 
     /**
@@ -73,13 +57,7 @@ class GreetingService {
  */
 
     delete = (greetingId, callback) => {
-        model.deleteById(greetingId, (err, result) => {
-            if (err) {
-                callback(err, null)
-            } else {
-                callback(null, result);
-            }
-        });
+        model.deleteById(greetingId, callback);
     }
 }
 

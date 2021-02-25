@@ -10,27 +10,23 @@
             "name": "Adarsh",
             "greeting": "Hello"
         },
-        "improperGreetingToPost": {
-            "greetingId": 2,
-            "greeting": "Hello"
-        },
         "greetingWithImproperName": {
             "greetingId": 7,
             "name": "co",
-            "greeting": "EHello"
+            "greeting": "Hello"
         },
         "greetingWithoutName": {
             "greetingId": 6,
-            "greeting": "DHello"
+            "greeting": "Hello"
         },
         "greetingWithoutMessage": {
             "greetingId": 8,
             "name": "Shivam"
         },
         "greetingToUpdate": {
-            "greetingId": 2,
-            "name": "payalllchanged",
-            "greeting": "Worlddd"
+            "greetingId": 4,
+            "name": "RajasUpdate",
+            "greeting": "hello"
         }
     }
 }

@@ -1,3 +1,10 @@
+/**
+ * @module       models
+ * @file         greeting.js
+ * @description  greetingModel class holds the databse related methods 
+ * @author       Rajas Dongre <itsmerajas2@gmail.com>
+ * @since        15/2/2021  
+-----------------------------------------------------------------------------------------------*/
 const mongoose = require('mongoose');
 
 const GreetingsSchema = mongoose.Schema({
@@ -5,7 +12,7 @@ const GreetingsSchema = mongoose.Schema({
     greeting: { type: String, required: true }
 }, {
     timestamps: true
-});
+}, { versionKey: false });
 
 const Greeting = mongoose.model('Greetings', GreetingsSchema);
 

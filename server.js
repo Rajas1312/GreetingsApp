@@ -1,3 +1,10 @@
+/**
+ * @module       Greetingsapp
+ * @file         server.js
+ * @description  connecting to server and rendering all routes
+ * @author       Rajas Dongre <itsmerajas2@gmail.com>
+*  @since        15/02/2021  
+-----------------------------------------------------------------------------------------------*/
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('./logger/logger');

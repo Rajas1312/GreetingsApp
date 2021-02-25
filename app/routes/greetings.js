@@ -1,3 +1,11 @@
+/**
+ * @module       routes
+ * @file         greetings.js
+ * @description  giving routes for crud operation
+ * @author       Rajas Dongre <itsmerajas2@gmail.com>
+*  @since        15/02/2021  
+-----------------------------------------------------------------------------------------------*/
+
 const greeting = require('../controllers/greetings.js');
 module.exports = (app) => {
     // Create a new Note

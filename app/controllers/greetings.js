@@ -1,3 +1,10 @@
+/**
+ * @module       controllers
+ * @file         greeting.js
+ * @description  GreetingController class takes the request and sends response
+ * @author       Rajas Dongre <itsmerajas2@gmail.com>
+*  @since        15/02/2021  
+-----------------------------------------------------------------------------------------------*/
 const service = require('../services/greetings.js');
 const Joi = require('joi');
 const logger = require('../../logger/logger.js')
@@ -55,21 +62,31 @@ class GreetingController {
         */
     findAll = (req, res) => {
         service.findAll((err, result) => {
-            if (err) {
-                (logger.error("Some error occurred while serching greeting"),
-                    res.status(404).send({
-                        sucess: false,
-                        message: "could not find any entries"
-                    })
-                )
-            } else {
-                logger.info("Greeting found successfully !"),
-                    res.status(200).send({
-                        sucess: true,
-                        message: "found greetings sucessfully",
-                        result: result
-                    })
+            try {
+                if (err) {
+                    (logger.error("Some error occurred while serching greeting"),
+                        res.status(404).send({
+                            sucess: false,
+                            message: "could not find any entries"
+                        })
+                    )
+                } else {
+                    logger.info("Greeting found successfully !"),
+                        res.status(200).send({
+                            sucess: true,
+                            message: "found greetings sucessfully",
+                            result: result
+                        })
+                }
+            } catch (error) {
+                logger.error("greeting not found");
+                res.send({
+                    success: false,
+                    status_code: 500,
+                    message: `greeting not found`,
+                });
             }
+
         })
     };
 
@@ -82,20 +99,29 @@ class GreetingController {
     findOne = (req, res) => {
         const greetingId = req.params.greetingId
         service.findOne(greetingId, (err, result) => {
-            if (err) {
-                (logger.error("Some error occurred while serching greetingId" + req.params.greetingId),
-                    res.status(500).send({
-                        sucess: false,
-                        message: "could not find the entry"
-                    })
-                )
-            } else {
-                logger.info("Greeting found successfully !"),
-                    res.status(200).send({
-                        sucess: true,
-                        message: "found greetings sucessfully",
-                        result: result
-                    })
+            try {
+                if (err) {
+                    (logger.error("Some error occurred while serching greetingId" + req.params.greetingId),
+                        res.status(500).send({
+                            sucess: false,
+                            message: "could not find the entry"
+                        })
+                    )
+                } else {
+                    logger.info("Greeting found successfully !"),
+                        res.status(200).send({
+                            sucess: true,
+                            message: "found greetings sucessfully",
+                            result: result
+                        })
+                }
+            } catch (error) {
+                logger.error("could not found greeting with id" + req.params.greetingId);
+                return res.send({
+                    success: false,
+                    status_code: 500,
+                    message: "error retrieving greeting with id " + req.params.greetingId
+                })
             }
         })
     };
@@ -108,28 +134,38 @@ class GreetingController {
     */
 
     update = (req, res) => {
-        const greeting = {
-            name: req.body.name,
-            message: req.body.message,
-            greetingID: req.params.greetingId
-        }
-        service.update(greeting, (err, result) => {
-            if (err) {
-                logger.error("Error updating greeting with id : " + req.params.greetingId),
-                    res.status(500).send({
-                        sucess: false,
-                        message: "could not find the entry"
-                    })
-            } else {
-                logger.info("Greeting updated successfully !"),
-                    res.status(200).send({
-                        sucess: true,
-                        message: "found greetings sucessfully",
-                        result: result
-                    })
+        try {
+            const greeting = {
+                name: req.body.name,
+                greeting: req.body.greeting,
+                greetingID: req.params.greetingId
             }
-        })
+            service.update(greeting, (err, result) => {
+                if (err) {
+                    logger.error("Error updating greeting with id : " + req.params.greetingId),
+                        res.status(500).send({
+                            sucess: false,
+                            message: "could not find the entry"
+                        })
+                } else {
+                    logger.info("Greeting updated successfully !"),
+                        res.status(200).send({
+                            sucess: true,
+                            message: "found greetings sucessfully",
+                            result: result
+                        })
+                }
+            })
+        } catch (error) {
+            logger.error("could update greeting with id" + req.params.greetingId);
+            return res.send({
+                success: false,
+                status_code: 500,
+                message: "error updating greeting with id " + req.params.greetingId
+            })
+        };
     }
+
 
     /**
      * @description delete greeting with id
@@ -139,23 +175,32 @@ class GreetingController {
      */
 
     delete = (req, res) => {
-        const greetingId = req.params.greetingId;
-        service.delete(greetingId, (err, result) => {
-            if (err) {
-                logger.error("Error deleting greeting with id : " + req.params.greetingId),
-                    res.status(500).send({
-                        success: false,
-                        message: "greeting not found with id " + greetingID
-                    })
-            } else {
-                logger.info("Greeting deleted successfully !"),
-                    res.status(200).send({
-                        success: true,
-                        message: "greeting deleted successfully!",
-                        result: result
-                    })
-            }
-        })
+        try {
+            const greetingId = req.params.greetingId;
+            service.delete(greetingId, (err, result) => {
+                if (err) {
+                    logger.error("Error deleting greeting with id : " + req.params.greetingId),
+                        res.status(500).send({
+                            success: false,
+                            message: "greeting not found with id " + greetingID
+                        })
+                } else {
+                    logger.info("Greeting deleted successfully !"),
+                        res.status(200).send({
+                            success: true,
+                            message: "greeting deleted successfully!",
+                            result: result
+                        })
+                }
+            })
+        } catch (error) {
+            logger.error("could delete greeting with id" + req.params.greetingId);
+            return res.send({
+                success: false,
+                status_code: 500,
+                message: "error could not delete greeting with id " + req.params.greetingId
+            })
+        }
     }
 }
 module.exports = new GreetingController();
